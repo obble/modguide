@@ -1,27 +1,27 @@
-	
-	_G 		= getfenv(0)
-	local H = {}
+
+	_G 			= getfenv(0)
+	local H 	= {}
 
 	H.FCF_SelectDockFrame = FCF_SelectDockFrame
 
 	local SelectDockFrame = function(f)
 		H.FCF_SelectDockFrame(f)
 		local vg    = _G['VG_MainFrame']
-        local vgs 	= _G['VG_SettingsFrame']
+		local vgs 	= _G['VG_SettingsFrame']
         if  vg then
-			if  f == ChatFrame3 then
-	            vg:Show()
+        	if  f == ChatFrame3 then
+        		vg:Show()
 	        	if  vgs.showthis then
 	        		vgs:Show()
 	        	end
 	        else
 	        	vg:Hide()
-	            if  vgs:IsVisible() then
+	        	if  vgs:IsVisible() then
 	        		vgs.showthis = true
 	        		vgs:Hide()
 	        	end
-			end
-		end
+	        end
+	    end
 	end
 
 	local AddGuide = function(parent)
@@ -32,12 +32,11 @@
 		vg:SetPoint('BOTTOMRIGHT',	parent, 0, -6)
 		vg:SetBackdrop(nil)
 		vg:SetScript('OnMouseDown', nil)
-
-        for _,  v in pairs({vg:GetChildren()}) do
-            if  v:GetBackdrop() then
-                v:SetBackdrop(nil)
-            end
-        end
+		for _,  v in pairs({vg:GetChildren()}) do
+			if  v:GetBackdrop() then
+				v:SetBackdrop(nil)
+			end
+		end
 	end
 
 	local OnEvent = function(n)
@@ -53,3 +52,5 @@
 	local e = CreateFrame'Frame'
 	e:RegisterEvent'PLAYER_LOGIN'
 	e:SetScript('OnEvent', OnEvent)
+
+	--
