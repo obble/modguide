@@ -1,0 +1,7 @@
+## Interface: 11200
+## Author: modernist
+## Title: modguide
+## Notes: vanillaguide in chat.
+## Dependencies: VanillaGuide
+
+guide.lua
