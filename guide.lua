@@ -1,6 +1,6 @@
 
-	_G 			= getfenv(0)
-	local H 	= {}
+	_G = getfenv(0)
+	local H = {}
 
 	H.FCF_SelectDockFrame = FCF_SelectDockFrame
 
@@ -8,20 +8,20 @@
 		H.FCF_SelectDockFrame(f)
 		local vg    = _G['VG_MainFrame']
 		local vgs 	= _G['VG_SettingsFrame']
-        if  vg then
-        	if  f == ChatFrame3 then
-        		vg:Show()
-	        	if  vgs.showthis then
-	        		vgs:Show()
-	        	end
-	        else
-	        	vg:Hide()
-	        	if  vgs:IsVisible() then
-	        		vgs.showthis = true
-	        		vgs:Hide()
-	        	end
-	        end
-	    end
+		if  vg then
+			if  f == ChatFrame3 then
+				vg:Show()
+				if  vgs.showthis then
+					vgs:Show()
+				end
+			else
+				vg:Hide()
+				if  vgs:IsVisible() then
+					vgs.showthis = true
+					vgs:Hide()
+				end
+			end
+		end
 	end
 
 	local AddGuide = function(parent)
