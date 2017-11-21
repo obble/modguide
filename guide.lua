@@ -2,14 +2,14 @@
 	_G = getfenv(0)
 	local H = {}
 
-	H.FCF_SelectDockFrame = FCF_SelectDockFrame
+	H.FCF_OnUpdate = FCF_OnUpdate
 
-	local SelectDockFrame = function(f)
-		H.FCF_SelectDockFrame(f)
+	local OnUpdate = function(elapsed)
+		H.FCF_OnUpdate(elapsed)
 		local vg    = _G['VG_MainFrame']
 		local vgs 	= _G['VG_SettingsFrame']
-		if  vg then
-			if  f == ChatFrame3 then
+		if  vg and (MouseIsOver(ChatFrame1, 45, -10, -5, 5) or MouseIsOver(ChatFrame3, 45, -10, -5, 5)  or not vg.embedded) then
+			if  ChatFrame3:IsShown() then
 				vg:Show()
 				if  vgs.showthis then
 					vgs:Show()
@@ -21,6 +21,23 @@
 					vgs:Hide()
 				end
 			end
+			vg.embedded = true
+		end
+	end
+
+	local AddWindow = function(i)
+		local _, _, _, _, _, _, shown = GetChatWindowInfo(i)
+		if  not shown then
+			SetChatWindowShown(3, true)
+			SetChatWindowName(3,  'Quests')
+			--[[for _, v in pairs(
+				{
+					ChatFrame3,
+					ChatFrame3Tab,
+				}
+			) do
+				v:Show()
+			end]]
 		end
 	end
 
@@ -40,14 +57,13 @@
 	end
 
 	local OnEvent = function(n)
-		SetChatWindowShown(3, true)
-		SetChatWindowName(3,  'Quests')
+		AddWindow(3)
 		ChatFrame_RemoveAllMessageGroups(ChatFrame3)
 		ChatFrame_RemoveAllChannels(ChatFrame3)
 		AddGuide(ChatFrame3)
 	end
 
-	FCF_SelectDockFrame = SelectDockFrame
+	FCF_OnUpdate = OnUpdate
 
 	local e = CreateFrame'Frame'
 	e:RegisterEvent'PLAYER_LOGIN'
